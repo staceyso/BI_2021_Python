@@ -1,6 +1,6 @@
 import math
 
 
-def rad_to_degrees(rad):
-    degree = rad*180/math.pi
-    return degree
+def degrees_to_rad(degree):
+    rad = degree/180*math.pi
+    return rad
