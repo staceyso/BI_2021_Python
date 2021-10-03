@@ -1,10 +1,6 @@
 name: PEP-8
 
-on:
-  push:
-    branches: [ main, BI_Python_HW, second-homework, second-homework-conflict ]
-  pull_request:
-    branches: [ main, BI_Python_HW, second-homework, second-homework-conflict ]
+on: [push]
 
 jobs:
   build:
