@@ -17,7 +17,8 @@ def gc_content(seq):
 def process_file1(input_fastq):
     with open(input_fastq, 'r') as f:
         reads = f.readlines()
-        #  This function reads fastq file in a list and make 4 different new lists:
+        #  This function reads fastq file in a list and make
+        #  4 different new lists:
         identifyer = reads[0::4]
         seq = reads[1::4]
         plus = reads[2::4]
