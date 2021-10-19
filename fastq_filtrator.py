@@ -1,7 +1,8 @@
 #  Function that calculates mean quality score in a read
 def quality(qual):
     quality_score = 0
-    #  For each symbol in quality score line, we calculate its number in ascii table and subtract 33
+    #  For each symbol in quality score line, we calculate its number in ascii
+    #  table and subtract 33
     for i in qual:
         quality_score += ord(i) - 33
     return quality_score / len(qual)
@@ -25,7 +26,8 @@ def process_file1(input_fastq):
         groups = zip(identifyer, seq, plus, quality)
         #  Create new empty list
         lst = []
-        #  For each tuple in a "groups" list we make a string out of it and add this string to our new list
+        #  For each tuple in a "groups" list we make a string out of it
+        #  and add this string to our new list
         for i in groups:
             lst.append(''.join(i))
         #  Finally we create a dictionary in which keys are our reads sequences
@@ -38,7 +40,8 @@ def process_file1(input_fastq):
 def process_file2(input_fastq):
     with open(input_fastq, 'r') as f:
         reads = f.readlines()
-        #  This function reads fastq file in a list and select reads and quality score sequences
+        #  This function reads fastq file in a list and select reads
+        #  and quality score sequences
         seq = reads[1::4]
         quality = reads[3::4]
         #  Then it makes dictionary of reads and quality score sequences
@@ -47,8 +50,8 @@ def process_file2(input_fastq):
 
 
 #  Main function that filters fastq file using previous functions
-def main(input_fastq, output_file_prefix, gc_bounds=[0, 100], length_bounds=[0, 2 ** 32], quality_threshold=0,
-         save_filtered=False):
+def main(input_fastq, output_file_prefix, gc_bounds=[0, 100],
+         length_bounds=[0, 2 ** 32], quality_threshold=0, save_filtered=False):
     #  Using output file prefix, we create paths to new fastq files
     passed_fastq = output_file_prefix + '_passed.fastq'
     failed_fastq = output_file_prefix + '_failed.fastq'
@@ -64,7 +67,8 @@ def main(input_fastq, output_file_prefix, gc_bounds=[0, 100], length_bounds=[0, 
             seq = key.rstrip('\n')
             if gc_bounds[0] <= gc_content(seq) <= gc_bounds[-1]:
                 if length_bounds[0] <= len(seq) <= length_bounds[-1]:
-                    #  If the read met all the conditions, write 4 lines that represents it into a new "passed" file
+                    #  If the read met all the conditions, write 4 lines
+                    #  that represents it into a new "passed" file
                     with open(passed_fastq, 'a') as output1:
                         output1.write(data[key])
         else:
@@ -76,9 +80,12 @@ def main(input_fastq, output_file_prefix, gc_bounds=[0, 100], length_bounds=[0, 
 
 input_fastq = input('Enter path to input fastq file: ')
 output_file_prefix = input('Enter output file prefix: ')
-gc_bounds = [int(i) for i in input('Enter 2 GC-bounds, divided by space: ').split()]
-length_bounds = [int(i) for i in input('Enter 2 length bounds, divided by space: ').split()]
+gc_bounds = [int(i) for i in input('Enter GC-bounds, '
+                                   'divided by space: ').split()]
+length_bounds = [int(i) for i in input('Enter length bounds, '
+                                       'divided by space: ').split()]
 quality_threshold = int(input('Enter quality threshold: '))
 save_filtered = input('Do we need to save filtered reads? Yes/No: ') == 'Yes'
 
-main(input_fastq, output_file_prefix, gc_bounds, length_bounds, quality_threshold, save_filtered)
+main(input_fastq, output_file_prefix, gc_bounds, length_bounds,
+     quality_threshold, save_filtered)
