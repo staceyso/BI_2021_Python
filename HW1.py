@@ -1,13 +1,13 @@
-def transcribe(dna):
+def transcribe(dna):  # for DNA sequences only
     return dna.replace("T", "U").replace("t", "u")
 
 
-def reverse(seq):
+def reverse(seq):  # works with DNA and RNA sequences
     return seq[::-1]
 
 
-def complement(seq):
-    compl_seq = []
+def complement(seq):  # works with DNA and RNA sequences
+    compl_seq = []  # creates an empty list for complementary sequence
     # list of complementary nucleotides:
     compl = dict(A='T', C='G', G='C', T='A', U='A', a='t', c='g', g='c', t='a', u='a')
     for nucl in seq:
@@ -15,16 +15,16 @@ def complement(seq):
     return "".join(compl_seq)
 
 
-def reverse_complement(seq):
-    compl_seq = []
+def reverse_complement(seq):  # works with DNA and RNA sequences
+    compl_seq = []  # creates an empty list for complementary sequence
     # list of complementary nucleotides:
     compl = dict(A='T', C='G', G='C', T='A', U='A', a='t', c='g', g='c', t='a', u='a')
     for nucl in seq:
-        compl_seq.append(compl[nucl])
-    return "".join(compl_seq)[::-1]
+        compl_seq.append(compl[nucl])  # at first complementary sequence is created
+    return "".join(compl_seq)[::-1]  # and then it is reversed
 
 
-def enter_sequence():
+def enter_sequence():  # function that reads input (DNA or RNA sequence) and checks if letters are valid
     while True:  # infinite cycle
         seq = input("Enter your sequence: ")
         ok_letters = set('aAcCgGtTuU')  # letters that occur in DNA or RNA
@@ -39,7 +39,7 @@ def enter_sequence():
     return seq
 
 
-def enter_dna():
+def enter_dna():  # function that reads input (DNA sequence) and checks if letters are valid
     while True:  # infinite cycle
         dna = input("Enter your sequence: ")
         ok_letters_dna = set('aAcCgGtT')  # letters that occur in DNA
@@ -69,6 +69,6 @@ while True:  # infinite cycle for entering commands and sequences
         print(complement(seq))
     elif command == 'reverse complement':
         seq = enter_sequence()  # we use special function to enter DNA or RNA sequence
-        print(reverse_complement(seq))  # выводится результат функции
+        print(reverse_complement(seq))
     else:    # if the command does not exist in the program
         print('This command does not exist, try again')
