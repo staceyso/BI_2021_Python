@@ -6,7 +6,9 @@ OS Version: Ubuntu 20.04.3 LTS
 Python version: Python 3.9.5
 
 Python 3.9 is required. You can check if you have it:
-    python 3.9 --version
+```
+python 3.9 --version
+```
 Or install it (if needed):
     sudo apt-get install python 3.9
 
