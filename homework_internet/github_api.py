@@ -45,5 +45,6 @@ def get_user_info(username):
 
     return dct
 
-if name == __main__:
+
+if __name__ == '__main__':
     print('Example:', get_user_info('staceyso'))
